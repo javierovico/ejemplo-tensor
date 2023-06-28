@@ -9,10 +9,8 @@ import * as images from '../images'
 const parseImageImport = (images) => {
     // Use local image,
     let imageObject = {}
-    const localImg = new Image()
 
     for (let key in images) {
-        const name = `${key}Src`
         const tempImg = new Image()
         tempImg.src = images[key]
         imageObject = {...imageObject, [`${key}Src`]: tempImg}
@@ -40,27 +38,6 @@ const detectContour = (img, context, predictions) => {
 // Draw image
 const drawImage = (predictions, image, index, canvas) => {
     const context = canvas.getContext('2d')
-    /*
-    // Calcula las dimensiones de la imagen escalada
-    const canvasWidth = canvas.width;
-    const canvasHeight = canvas.height;
-    const imageAspect = image.width / image.height;
-    let drawWidth = canvasWidth;
-    let drawHeight = canvasHeight;
-
-    if (imageAspect > 1) {
-        drawHeight = drawWidth / imageAspect;
-    } else {
-        drawWidth = drawHeight * imageAspect;
-    }
-
-    // Calcula la posición de la imagen escalada para centrarla en el canvas
-    const offsetX = (canvasWidth - drawWidth) / 2;
-    const offsetY = (canvasHeight - drawHeight) / 2;
-
-    // Dibuja la imagen escalada en el canvas
-    context.drawImage(image, offsetX, offsetY, drawWidth, drawHeight);
-     */
     context.drawImage(image, 0, 0)
     canvas.addEventListener('click', () => detectContour(image, context, predictions))
 }
@@ -71,7 +48,7 @@ const drawImage = (predictions, image, index, canvas) => {
     Object.entries(imageObject).forEach(([, img], index) => {
         const canvas = document.createElement('canvas');
         canvas.setAttribute("width", '600')
-        canvas.setAttribute("height", '600')
+        canvas.setAttribute("height", '1000')
         canvas.setAttribute("src", "./src/index.js")
         canvas.setAttribute("class", "canvas")
         document.body.appendChild(canvas);
